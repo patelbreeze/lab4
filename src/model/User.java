@@ -20,7 +20,7 @@ public class User {
         String type;
         String message;
         String filename;
-
+        String date;
     public String getFirstname() {
         return firstname;
     }
@@ -84,5 +84,11 @@ public class User {
     public void setfilename(String filename) {
         this.filename = filename;
     }    
-    
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }     
 }
