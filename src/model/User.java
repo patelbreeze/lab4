@@ -4,6 +4,8 @@
  */
 package model;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Breeze
@@ -17,6 +19,7 @@ public class User {
         String gender;
         String type;
         String message;
+        String filename;
 
     public String getFirstname() {
         return firstname;
@@ -73,6 +76,13 @@ public class User {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
+    public String getfilename() {
+        return filename;
+    }
+
+    public void setfilename(String filename) {
+        this.filename = filename;
+    }    
     
 }

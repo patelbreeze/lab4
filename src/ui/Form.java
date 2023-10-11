@@ -9,9 +9,10 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import model.User;
 
 /**
@@ -328,24 +329,33 @@ public class Form extends javax.swing.JPanel {
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
-        String filename = null;
         filename = f.getAbsolutePath();
         Upload_image_field.setText(filename);
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(filename);
-        int a = JOptionPane.showConfirmDialog(this, "Is this the same image?", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+//        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(filename);
+//        int a = JOptionPane.showConfirmDialog(this, "Is this the same image?", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
     }//GEN-LAST:event_Upload_buttonActionPerformed
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
         // TODO add your handling code here:
 
+//        filename = f.getAbsolutePath();
+//        Upload_image_field.setText(filename);
+
         JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File f = chooser.getSelectedFile();
-        String filename = null;
-        filename = f.getAbsolutePath();
-        Upload_image_field.setText(filename);
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(filename);
-        int a = JOptionPane.showConfirmDialog(this, "Is this the same image?", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGE", "png", "jpg", "jpeg");
+        chooser.addChoosableFileFilter(fnef);
+        int  showOpenDialogue = chooser.showOpenDialog(null);
+        
+        if(showOpenDialogue == JFileChooser.APPROVE_OPTION){
+            File selectedImageFile = chooser.getSelectedFile();
+            filename = selectedImageFile.getAbsolutePath();
+            uploadImageField.setText(filename);
+            
+        }
+        
+        
+        
+        
     }//GEN-LAST:event_uploadButtonActionPerformed
 
     private void firstNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstNameFieldKeyPressed
@@ -430,6 +440,10 @@ public class Form extends javax.swing.JPanel {
         newUser.setLastname(lastNameField.getText());
         newUser.setAge(ageField.getText());
         newUser.setEmail(emailField.getText());
+        newUser.setType(patientTypeDropBox.getSelectedItem().toString());
+        newUser.setMessage(messageField.getText());
+        newUser.setfilename(filename);
+
         if (Male.isSelected() == true) {
             newUser.setGender("Male");
         } else if (Female.isSelected() == true) {
@@ -437,9 +451,6 @@ public class Form extends javax.swing.JPanel {
         } else {
             newUser.setGender("Prefer not to say");
         }
-
-        newUser.setType(patientTypeDropBox.getSelectedItem().toString());
-        newUser.setMessage(messageField.getText());
 
         ViewPanel newViewPanel = new ViewPanel(newUser);
         bottomPanel.add(newViewPanel);
@@ -486,4 +497,5 @@ public class Form extends javax.swing.JPanel {
     private javax.swing.JButton uploadButton;
     private javax.swing.JTextField uploadImageField;
     // End of variables declaration//GEN-END:variables
+        String filename;
 }
